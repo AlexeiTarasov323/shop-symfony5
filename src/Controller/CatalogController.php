@@ -27,7 +27,7 @@ class CatalogController extends AbstractController
 
         $response = new Response($this->twig->render('catalog/index.html.twig', [
             'categories' => $categoryRepository->findAll(),
-            'lastproducts' => $productRepository->getLatestProducts(),
+            'latestproducts' => $productRepository->getLatestProducts(),
 
         ]));
 
@@ -36,14 +36,14 @@ class CatalogController extends AbstractController
 
 
      /**
-     * @Route("/catalog{slug}", name=aCatalog")
+     * @Route("/catalog{$id}", name="catalog_id")
      */
     public function actionCatalog(CategoryRepository $categoryRepository, ProductRepository $productRepository): Response
     {   
 
         $response = new Response($this->twig->render('catalog/category.html.twig', [
             'categories' => $categoryRepository->findAll(),
-            'categoryproducts' => $productRepository->getProductsListByCategory($slug),
+            'productslist' => $productRepository->getProductsListByCategory($id),
 
         ]));
 
