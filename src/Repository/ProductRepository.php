@@ -33,6 +33,20 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getProductsListByCategory($categoryId)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.status = :stat')
+            ->andWhere('p.category_id = :cat')
+            ->setParameter('stat', 1)
+            ->setParameter('cat', $categoryId)
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(self::SHOW_BY_DEFAULT)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

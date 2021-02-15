@@ -20,7 +20,7 @@ class SiteController extends AbstractController
     }
 
 
-
+    
     /**
      * @Route("/", name="homepage")
      */
