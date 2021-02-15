@@ -8,4 +8,11 @@
         <td>{{ category.name }}</td>
     </tr>
     {% endfor %}
+
+    {% for lastproduct in lastproducts %}
+    <tr>
+        <td>{{ lastproducts.name }}</td>
+        <td>{{ lastproducts.price }}</td>
+    </tr>
+    {% endfor %}
 {% endblock %}

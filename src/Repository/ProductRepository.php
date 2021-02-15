@@ -13,10 +13,24 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Product[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ProductRepository extends ServiceEntityRepository
-{
+{   
+    public const SHOW_BY_DEFAULT = 10;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
+    }
+
+    public function getLatestProducts()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.status = :val')
+            ->setParameter('val', 1)
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(self::SHOW_BY_DEFAULT)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**
